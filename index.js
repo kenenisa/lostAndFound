@@ -32,6 +32,7 @@ bot.telegram.setMyCommands([
 //
 bot.command('/found', ctx => require(`./controller/ButtonHandlers/start@0x0.js`)(ctx, ctx.message))
 bot.command('/lost', ctx => require(`./controller/ButtonHandlers/start@0x1.js`)(ctx, ctx.message))
+bot.command('/subscribe', ctx => require(`./controller/ButtonHandlers/start@1x1.js`)(ctx, ctx.message))
 //
 bot.use(async (ctx, next) => {
   console.time(`Processing update ${ctx.update.update_id}`);

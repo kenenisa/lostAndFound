@@ -1,6 +1,6 @@
 const testing = false;
 
-const testingToken = '1678416127:AAEE8YG-_B12OaADiRrYicGgYoX8UNwEkyw'
+const testingToken = '5135705874:AAFqxRoczYGB2dC0nLAWUcAKt81URz2RvHY'
 const realToken = '5135705874:AAFqxRoczYGB2dC0nLAWUcAKt81URz2RvHY'
 
 module.exports = {

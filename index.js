@@ -27,7 +27,8 @@ bot.use(session)
 bot.telegram.setMyCommands([
   { command: '/start', description: 'starts or restarts the bot' },
   { command: '/found', description: 'If you have found an item' },
-  { command: '/lost', description: 'If you have lost a item' },
+  { command: '/lost', description: 'If you have lost an item' },
+  { command: '/subscribe', description: 'Subscribe to get notifications when someone finds your ID card' },
 ]);
 //
 bot.command('/found', ctx => require(`./controller/ButtonHandlers/start@0x0.js`)(ctx, ctx.message))

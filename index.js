@@ -99,7 +99,7 @@ bot.on('callback_query', (ctx) => {
 })
 //
 const secretPath = '/' + token;
-// bot.telegram.setWebhook('https://glacial-tor-51508.herokuapp.com' + secretPath)
+bot.telegram.setWebhook('https://glacial-tor-51508.herokuapp.com' + secretPath)
 // bot.telegram.setWebhook('http://localhost:5000' + secretPath)
 
 

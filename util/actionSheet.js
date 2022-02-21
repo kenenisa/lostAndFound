@@ -16,6 +16,8 @@ module.exports = {
     LOST_OTHER:'lother',
     
     ITS_MINE:'itsmine',
+    CONFIRM_RETURNED:'confirm',
     
-    PAGINATE_NEXT:'pag_next'
+    PAGINATE_NEXT:'pag_next',
+
 }

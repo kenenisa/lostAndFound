@@ -18,13 +18,13 @@ module.exports = (ctx) => {
                 reply_markup: keyboards.start
             });
             User.findOne({ where: { state: item.ets } }).then(usr => {
-                ctx.telegram.sendMessage(usr.tg_id, "Someone found your Id card! 😅").then(() => {
+                ctx.telegram.sendMessage(usr.tg_id, "🔔 Someone just found your Id card! 😅").then(() => {
                     const photo = JSON.parse(item.photo)
                     ctx.telegram.sendPhoto(usr.tg_id, photo[0].file_id, {
                         caption: item.description
                     }).then(() => {
                         ctx.telegram.sendContact(usr.tg_id, phoneNumber, usr.name).then(msg => {
-                            ctx.telegram.sendMessage(usr.tg_id, "Please contact this person or call " + phoneNumber + " \n\nIf You didn't lose your id just ignore all this", {
+                            ctx.telegram.sendMessage(usr.tg_id, "🔔 Please contact this person or call " + phoneNumber + " \n\nIf You didn't lose your id just ignore all this", {
                                 reply_to_message_id: msg.message_id
                             })
                         })

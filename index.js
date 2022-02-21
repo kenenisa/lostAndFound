@@ -45,8 +45,9 @@ bot.use(async (ctx, next) => {
         User.create({
           name: msg.chat.first_name + ' ' + (msg.chat.last_name ? msg.chat.last_name : ''),
           tg_id: msg.chat.id,
-          state: JSON.stringify({})
         })
+      }else{
+        ctx.session.state = !!e.state
       }
       ctx.session.user = msg.chat.id
       await next()
@@ -86,8 +87,12 @@ bot.on('callback_query', (ctx) => {
     require('./controller/actions/LOST_ID_SELECTION.js')(ctx).then(() => {
       ctx.answerCbQuery()
     })
-  }else if(/(...F)[A-Z]*/.test(ctx.update.callback_query.data)){
-    require('./controller/handler/AddPhone.js')(ctx,ctx.update.callback_query.data.slice(4)).then(() => {
+  }else if (/[A][1-9]*/g.test(ctx.update.callback_query.data)) {
+    require('./controller/actions/CONFIRM_REMOVE.js')(ctx).then(() => {
+      ctx.answerCbQuery()
+    })
+  } else if (/(...F)[A-Z]*/.test(ctx.update.callback_query.data)) {
+    require('./controller/handler/AddPhone.js')(ctx, ctx.update.callback_query.data.slice(4)).then(() => {
       ctx.answerCbQuery()
     })
   }

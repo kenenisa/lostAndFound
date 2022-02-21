@@ -15,8 +15,8 @@ module.exports = async ctx => {
                         reply_to_message_id: msg.message_id
                     }).then(() => {
                         ctx.telegram.sendMessage(
-                            `<a href="tg://user?id=${ctx.update.callback_query.message.chat.id}">${ctx.update.callback_query.message.chat.first_name}</a> has claimed an item you posted. Please confirm if you've returned it!`,
                             user.tg_id,
+                            `<a href="tg://user?id=${ctx.update.callback_query.message.chat.id}">${ctx.update.callback_query.message.chat.first_name}</a> has claimed an item you posted. Please confirm if you've returned it!`,
                             {
                                 reply_markup: { inline_keyboard: [[{ text: '✅ Yes i returned', callback_data: 'I' + item.id }]] }
                             })

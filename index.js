@@ -87,7 +87,7 @@ bot.on('callback_query', (ctx) => {
     require('./controller/actions/LOST_ID_SELECTION.js')(ctx).then(() => {
       ctx.answerCbQuery()
     })
-  }else if (/[A][1-9]*/g.test(ctx.update.callback_query.data)) {
+  }else if (/[I][1-9]*/g.test(ctx.update.callback_query.data)) {
     require('./controller/actions/CONFIRM_REMOVE.js')(ctx).then(() => {
       ctx.answerCbQuery()
     })

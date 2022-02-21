@@ -14,10 +14,12 @@ module.exports = async ctx => {
                     ctx.reply('Please contact this person to get your item back or call ' + user.phone_number, {
                         reply_to_message_id: msg.message_id
                     }).then(() => {
-                        ctx.replyWithHTML(
-                            `<a href="tg://user?id=${ctx.update.callback_query.message.chat.id}">${ctx.update.callback_query.message.chat.first_name}</a> has claimed an item you posted. Please confirm if you've returned it!`, {
-                            reply_markup: { inline_keyboard: [[{ text: '✅ Yes i returned', callback_data: 'I' + item.id }]] }
-                        })
+                        ctx.telegram.sendMessage(
+                            `<a href="tg://user?id=${ctx.update.callback_query.message.chat.id}">${ctx.update.callback_query.message.chat.first_name}</a> has claimed an item you posted. Please confirm if you've returned it!`,
+                            user.tg_id,
+                            {
+                                reply_markup: { inline_keyboard: [[{ text: '✅ Yes i returned', callback_data: 'I' + item.id }]] }
+                            })
                     })
                 })
             })

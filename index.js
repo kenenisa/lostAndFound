@@ -39,8 +39,10 @@ bot.use(async (ctx, next) => {
   console.time(`Processing update ${ctx.update.update_id}`);
   ctxu = ctx.update;
   const msg = (ctxu.callback_query || ctxu).message;
+  msg.text = msg.text ? msg.text : ctx.update.callback_query.data
+
   const chat = msg.chat
-  console.log(`id:${chat.id}###chat: ${chat.first_name + ' ' + (chat.last_name ? chat.last_name : '')}###message: ${msg.text.replace(/\n/g,'###')}###${JSON.stringify(msg).replace(/\n/g,'###')}`)
+  console.log(`id:${chat.id}###chat: ${chat.first_name + ' ' + (chat.last_name ? chat.last_name : '')}###message: ${msg.text.replace(/\n/g, '###')}###${JSON.stringify(msg).replace(/\n/g, '###')}`)
 
   if (!ctx.session.user) {
     User.findOne({ where: { tg_id: chat.id } }).then(async (e) => {
@@ -49,7 +51,7 @@ bot.use(async (ctx, next) => {
           name: chat.first_name + ' ' + (chat.last_name ? chat.last_name : ''),
           tg_id: chat.id,
         })
-      }else{
+      } else {
         ctx.session.state = !!e.state
       }
       ctx.session.user = chat.id
@@ -90,7 +92,7 @@ bot.on('callback_query', (ctx) => {
     require('./controller/actions/LOST_ID_SELECTION.js')(ctx).then(() => {
       ctx.answerCbQuery()
     })
-  }else if (/[I][1-9]*/g.test(ctx.update.callback_query.data)) {
+  } else if (/[I][1-9]*/g.test(ctx.update.callback_query.data)) {
     require('./controller/actions/CONFIRM_REMOVE.js')(ctx).then(() => {
       ctx.answerCbQuery()
     })

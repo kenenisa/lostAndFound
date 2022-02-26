@@ -8,6 +8,9 @@ module.exports = async ctx => {
         if (item) {
 
             User.findByPk(item.founderId).then(user => {
+                if (!user) {
+                    Item.destroy({ where: { id: ctx.session.itsMineId } })
+                }
                 ctx.session.itsMineId = undefined
                 ctx.session.action = undefined
                 ctx.replyWithContact(user.phone_number, user.name).then(msg => {
@@ -18,7 +21,7 @@ module.exports = async ctx => {
                             user.tg_id,
                             `<a href="tg://user?id=${ctx.update.callback_query.message.chat.id}">${ctx.update.callback_query.message.chat.first_name}</a> has claimed an item you posted. Please confirm if you've returned it!`,
                             {
-                                parse_mode:'HTML',
+                                parse_mode: 'HTML',
                                 reply_markup: { inline_keyboard: [[{ text: '✅ Yes i returned', callback_data: 'I' + item.id }]] }
                             })
                     })

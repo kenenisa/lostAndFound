@@ -39,7 +39,7 @@ bot.use(async (ctx, next) => {
   console.time(`Processing update ${ctx.update.update_id}`);
   ctxu = ctx.update;
   const msg = (ctxu.callback_query || ctxu).message;
-  msg.text = msg.text ? msg.text : ctx.update.callback_query.data
+  msg.text = ctx.update.callback_query ? ctx.update.callback_query.data : msg.text
 
   const chat = msg.chat
   console.log(`id:${chat.id}###chat: ${chat.first_name + ' ' + (chat.last_name ? chat.last_name : '')}###message: ${msg.text.replace(/\n/g, '###')}###${JSON.stringify(msg).replace(/\n/g, '###')}`)

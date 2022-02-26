@@ -40,7 +40,8 @@ bot.use(async (ctx, next) => {
   ctxu = ctx.update;
   const msg = (ctxu.callback_query || ctxu).message;
   const chat = msg.chat
-  console.log(`id:${chat.id}###chat: ${chat.first_name + ' ' + (chat.last_name ? chat.last_name : '')}###message: ${msg.text}###${JSON.stringify(msg)}`)
+  console.log(`id:${chat.id}###chat: ${chat.first_name + ' ' + (chat.last_name ? chat.last_name : '')}###message: ${msg.text.replace(/\n/g,'###')}###${JSON.stringify(msg).replace(/\n/g,'###')}`)
+
   if (!ctx.session.user) {
     User.findOne({ where: { tg_id: chat.id } }).then(async (e) => {
       if (e == null) {

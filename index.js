@@ -39,17 +39,19 @@ bot.use(async (ctx, next) => {
   console.time(`Processing update ${ctx.update.update_id}`);
   ctxu = ctx.update;
   const msg = (ctxu.callback_query || ctxu).message;
+  const chat = msg.chat
+  console.log(`id:${chat.id}\nchat: ${chat.first_name + ' ' + (chat.last_name ? chat.last_name : '')}\nmessage: ${msg.text}\n\n${JSON.stringify(msg)}`)
   if (!ctx.session.user) {
-    User.findOne({ where: { tg_id: msg.chat.id } }).then(async (e) => {
+    User.findOne({ where: { tg_id: chat.id } }).then(async (e) => {
       if (e == null) {
         User.create({
-          name: msg.chat.first_name + ' ' + (msg.chat.last_name ? msg.chat.last_name : ''),
-          tg_id: msg.chat.id,
+          name: chat.first_name + ' ' + (chat.last_name ? chat.last_name : ''),
+          tg_id: chat.id,
         })
       }else{
         ctx.session.state = !!e.state
       }
-      ctx.session.user = msg.chat.id
+      ctx.session.user = chat.id
       await next()
     })
   } else {

@@ -42,7 +42,7 @@ bot.use(async (ctx, next) => {
   msg.text = ctx.update.callback_query ? ctx.update.callback_query.data : msg.text
 
   const chat = msg.chat
-  console.log(`id:${chat.id}###chat: ${chat.first_name + ' ' + (chat.last_name ? chat.last_name : '')}###message: ${msg.text.replace(/\n/g, '###')}###${JSON.stringify(msg).replace(/\n/g, '###')}`)
+  console.log(`id:${chat.id}###chat: ${chat.first_name + ' ' + (chat.last_name ? chat.last_name : '')}###message: ${msg.text?msg.text.replace(/\n/g, '###'):"[File]"}###${JSON.stringify(msg).replace(/\n/g, '###')}`)
 
   if (!ctx.session.user) {
     User.findOne({ where: { tg_id: chat.id } }).then(async (e) => {

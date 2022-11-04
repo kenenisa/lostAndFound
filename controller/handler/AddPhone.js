@@ -5,7 +5,7 @@ const { User, Item } = require('./../../models/db.js');
 module.exports = (ctx, ets = false) => {
     const idCard = ets ? ets : ctx.message.text.toLowerCase()
     // if (checkIDFormat(ctx, idCard)) {
-        User.findOne({ where: { tg_id: ctx.from.id } }).then(user => {
+        return User.findOne({ where: { tg_id: ctx.from.id } }).then(user => {
             Item.create({ type: "PHONE", ets: idCard, founderId: user.id }).then(item => {
                 ctx.session.action = undefined;
                 ctx.session.actionPhoto = 'ItemPhoto';

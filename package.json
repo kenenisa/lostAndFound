@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Kenenisa alemayehu",
   "license": "ISC",
   "dependencies": {
     "dayjs": "^1.10.6",
